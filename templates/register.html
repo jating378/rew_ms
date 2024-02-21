@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-1845059450646898" crossorigin="anonymous"></script>
+    <title>Register Page</title>
+    <style>
+        body {
+            background-image: url('static/money_with_background_of_gray_and_black_hd_money.jpg');
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main-container {
+            background-color: black; /* Transparent background */
+            border: 2px solid white; /* White border */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        h1 {
+            color: white; /* White text color */
+        }
+        h3{
+            color:white;
+        }
+        label, input {
+            background-color: black; /* Black background for labels and inputs */
+            color: white; /* White text color for labels and inputs */
+            padding: 5px;
+            border: 1px solid white; /* White border for inputs */
+            border-radius: 5px;
+        }
+        .register-button {
+        background-color: white; /* White background color */
+        color: black; /* Black text color for the button text */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        }
+    .   register-button:hover {
+        background-color: lightgray; /* Light gray background on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <h1>Register</h1>
+        <form method="POST" action="/register">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm password" required><br><br>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required><br><br>
+            <input type="submit" class="register-button" value="Register">
+        </form>
+        <p>{{ message }}</p>
+        <h3>If you have completed the registration, <a href="/login">click here</a></h3>
+    </div>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-1845059450646898" crossorigin="anonymous"></script>
+    <!-- ONLINE OFFERS -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1845059450646898"
+        data-ad-slot="3151920758" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-1845059450646898" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-1845059450646898"
+        data-ad-slot="8912332137"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+
+</html>

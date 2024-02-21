@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+    
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #4d4d4d, #000000); /* Gradient from left to right */
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-line {
+            color: rgb(0, 0, 0);
+            position: fixed;
+            top: 25%;
+            left: 20%;
+            font-size: 25px;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .login-box {
+          padding: 30px;
+          position: fixed;
+          top: 30%;
+          left: 50%;
+          transform: translateX(-100%); /* Initially moved to the left */
+          background-color: rgb(247, 239, 239);
+          border-radius: 15px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          text-align: center;
+          border: 5px solid black;
+          animation: fadeInLeft 1s ease-out forwards; /* Keep the forwards to retain the final state */
+        }
+        
+        @keyframes fadeInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-100%);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(-50%);
+          }
+        }
+
+
+
+        .login-input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #000000;
+            border-radius: 50px;
+        }
+
+        .login-button {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            background-color: #053c3e;
+            color: #f4f2f2;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 3px solid #000000;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class ='login-box'>
+    <h2>Login</h2>
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    <form method="POST">
+        <label for="user_id">User ID:</label>
+        <input type="text" id="user_id" name="user_id" class="login-input" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" class="login-input" required><br>
+
+        <input type="submit" value="Login" class="login-button">
+    </form>
+    </div>
+</body>
+</html>

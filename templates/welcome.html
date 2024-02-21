@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100%;
+            background-color: #022021; /* Sidebar background color */
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding-top: 20px;
+        }
+
+        .sidebar nav {
+            padding-left: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .sidebar li:hover {
+            background-color: #066669; /* Change the background color on hover */
+        }
+
+        .content {
+            margin-left: 200px; /* Adjusted for sidebar width */
+            padding: 20px;
+        }
+        
+        .signout-button {
+          width: 10%;
+          padding: 10px;
+          background-color: #053c3e;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          position: fixed;
+          top: 5%;
+          left: 80%;
+        }
+        
+        .signout-button:hover {
+          background-color: #066669;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li>Orders</li>
+                <li>Inventory</li>
+                <li>Clients</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <h1>Welcome, {{ user_id }}!</h1>
+        <button class="signout-button" onclick="signOut()">Sign Out</button>
+
+        <script>
+            function signOut() {
+                window.location.href = "{{ url_for('homepage') }}";
+            }
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #2BC0E4;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #EAECC6, #2BC0E4);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #EAECC6, #2BC0E4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: #333;
+        }
+
+        h1, h2, p, ul, li {
+            font-family: "Exo", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            font-style: normal;
+            padding: 0;
+            text-align:center;
+            margin-bottom:5px;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .flex-container {
+            margin-bottom:50px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .flex-item-1 {
+            position:absolute;
+            top:15%;
+            left:2%;
+            width: 40%; /* Adjust the width as needed */
+            margin-bottom: 20px;
+            background-color: #fff;
+            border:5px solid black;
+            border-radius:10px;
+            padding: 20px;
+            height:200%;
+        }
+
+        .flex-item-2 {
+            position:absolute;
+            top: 15%;
+            left:55%;
+            width: 40%; /* Adjust the width as needed */
+            margin-bottom: 20px;
+            background-color: #fff;
+            border:5px solid black;
+            border-radius:10px;
+            padding: 20px;
+            height:200%;
+        }
+
+
+        ul {
+            list-style-type: none;
+
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .chart-container {
+            width: 80%;
+
+            max-width: 600px; /* Adjust the max-width as needed */
+            margin: 25px auto;
+        }
+
+         .back-to-home {
+            position:fixed;
+            top:1%;
+            left:90%;
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-to-home a {
+            text-decoration: none;
+            background-color: #0072B5;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            border : 2px solid black;
+        }
+
+        .back-to-home a:hover {
+            background-color: rgb(3, 60, 134);
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Analysis</h1>
+
+    <div class="flex-container">
+        <!-- Left Container - Orders Stats -->
+        <div class="flex-item-1">
+            <h2>Total Orders : {{ total_orders_sheet1 }}</h2>
+
+            <h2>Total Sales by Item Category </h2>
+            <ul>
+                {% for category, total_amount in category_totals_sheet1.items() %}
+                    <li>{{ category }}: ₹{{ total_amount }}</li>
+                {% endfor %}
+            </ul>
+
+            <h2>Total Sales Across All Categories</h2>
+            <p>Total Sales: ₹{{ total_sales_all_categories_sheet1 }}</p>
+
+
+
+            <h2>Total Outstanding Across All Buyers</h2>
+            <p>Total Sales: ₹{{ total_outstanding_all_categories_sheet3 }}</p>
+
+            <h2>Total Outstanding by Buyer Category </h2>
+            <ul>
+                {% for category, total_outstanding in category_totals_sheet3.items() %}
+                    <li>{{ category }}: ₹{{ total_outstanding }}</li>
+                {% endfor %}
+            </ul>
+
+
+             <h2>    Pie Chart for Sales Distribution</h2>
+            <div class="chart-container">
+                <canvas id="salesPieChart" width="300" height="300"></canvas>
+            </div>
+
+
+        </div>
+
+
+        <!-- Right Container - Items Stats -->
+        <div class="flex-item-2">
+            <h2>Total Quantities by Category </h2>
+            <ul>
+                {% for category, total_quantity in category_totals_sheet2.items() %}
+                    <li>{{ category }}: {{ total_quantity }}</li>
+                {% endfor %}
+            </ul>
+
+
+            <h2>     Bar Graph for Orders per Month</h2>
+            <div class="chart-container">
+                <canvas id="ordersBarChart" width="600" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-home">
+        <a href="{{ url_for('welcome') }}">Back to Home</a>
+    </div>
+
+    <script>
+        var salesDataSheet1 = {{ category_totals_sheet1|tojson }};
+        var salesDataSheet2 = {{ category_totals_sheet2|tojson }};
+        var combinedSalesData = {...salesDataSheet1, ...salesDataSheet2};
+
+
+        var salesDataSheet1 = {{ category_totals_sheet1|tojson }};
+
+        var ctx = document.getElementById('salesPieChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(salesDataSheet1),
+                datasets: [{
+                    data: Object.values(salesDataSheet1),
+                    backgroundColor: ['rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)', 'rgba(255, 206, 86, 0.7)'],
+                }],
+            },
+            options: { responsive: true, maintainAspectRatio: false },
+        });
+
+
+
+         var ordersPerMonthSheet1 = {{ orders_per_month_sheet1|tojson }};
+
+        var ctx = document.getElementById('ordersBarChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(ordersPerMonthSheet1),
+                datasets: [{
+                    label: 'Orders per Month',
+                    data: Object.values(ordersPerMonthSheet1),
+                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                }],
+            },
+            options: { responsive: true, maintainAspectRatio: false },
+        });
+    </script>
+</body>
+</html>

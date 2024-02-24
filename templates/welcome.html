@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Exo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +18,15 @@
         body {
             display: flex;
             margin: 0;
+            background: #2BC0E4;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #EAECC6, #2BC0E4);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #EAECC6, #2BC0E4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+
+
+
         }
 
         .sidebar {
@@ -26,6 +44,7 @@
         }
 
         .sidebar ul {
+            margin-top:100px;
             list-style: none;
             padding: 0;
         }
@@ -34,6 +53,8 @@
             color: white;
             padding: 10px;
             cursor: pointer;
+            margin-bottom:10px;
+            font-weight:bold;
         }
 
         .sidebar li:hover {
@@ -44,45 +65,510 @@
             margin-left: 200px; /* Adjusted for sidebar width */
             padding: 20px;
         }
-        
-        .signout-button {
-          width: 10%;
-          padding: 10px;
-          background-color: #053c3e;
-          color: #fff;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          position: fixed;
-          top: 5%;
-          left: 80%;
+
+        .content h1{
+            font-family: "Anta", sans-serif;
+            font-weight: 400;
+            font-style: normal;
         }
-        
+
+        .signout-button {
+            width: 10%;
+            padding: 10px;
+            background-color: #053c3e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: fixed;
+            top: 5%;
+            left: 85%;
+            font-family: "Anta", sans-serif;
+            font-weight: bold;
+            font-style: normal;
+
+        }
+
         .signout-button:hover {
-          background-color: #066669;
+            background-color: #066669;
+        }
+
+        .container-box {
+            padding: 30px;
+            position: fixed;
+            top: 20%;
+            left: 87%;
+            height: 65%;
+            width: 500px;
+            transform: translateX(-100%); /* Initially moved to the left */
+            background-color:  #03333c;
+            border-radius: 15px;
+            box-shadow: 0 0 10px #2BC0E4;
+            text-align: center;
+            color:white;
+
+            border: 5px solid white;
+            animation: fadeInLeft 1s ease-out forwards; /* Keep the forwards to retain the final state */
+        }
+
+        .container-box label {
+
+        margin-bottom: 5px;
+        display: block;
+        font-weight: bold;
+    }
+
+
+        .container-box select,
+        .container-box input {
+            /* Add styles for select and input elements */
+            margin-top:10px;
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius:10px;
+        }
+
+
+        .container-box input[type="submit"] {
+            cursor: pointer;
+            background-color: #055a6e; /* Set your desired background color */
+            color: white; /* Set your desired text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .container-box input[type="submit"]:hover {
+            background-color: #066669; /* Set your desired background color on hover */
+        }
+
+        /* Your CSS styles */
+        .nav-link {
+            color: white; /* Set your desired text color */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .nav-link:hover {
+            /* Define styles for hover (optional) */
+            color: #555; /* Change text color on hover if desired */
+        }
+
+        .add-order-button{
+            font-family: "Anta", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            position:fixed;
+            top : 20%;
+            left:15%;
+            height:50px;
+            width:500px;
+            padding:5px;
+            background-color:#053c3e;
+            color:white;
+            border-radius:10px;
+            animation: fadeInLeft2 1s ease-out forwards;
+        }
+
+        .add-order-button:hover {
+            /* Define styles for hover (optional) */
+            background-color: #066669; /* Change text color on hover if desired */
+            cursor:pointer;
+        }
+
+        .add-item-button{
+            font-family: "Anta", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            position:fixed;
+            top : 30%;
+            left:15%;
+            height:50px;
+            width:500px;
+            padding:5px;
+            background-color:#053c3e;
+            color:white;
+            border-radius:10px;
+            animation: fadeInLeft2 1s ease-out forwards;
+        }
+
+        .add-item-button:hover {
+            /* Define styles for hover (optional) */
+            background-color: #066669; /* Change text color on hover if desired */
+            cursor: pointer;
+        }
+
+        .add-buyer-button{
+            font-family: "Anta", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            position:fixed;
+            top : 40%;
+            left:15%;
+            height:50px;
+            width:500px;
+            padding:5px;
+            background-color:#053c3e;
+            color:white;
+            border-radius:10px;
+            animation: fadeInLeft2 1s ease-out forwards;
+        }
+
+        .add-buyer-button:hover {
+            /* Define styles for hover (optional) */
+            background-color: #066669; /* Change text color on hover if desired */
+            cursor: pointer;
+        }
+
+
+        .upcoming {
+            position: fixed;
+            top: 50%;
+            left: 48%;
+            padding: 30px;
+            height: 35%;
+            width: 450px;
+            transform: translateX(-100%); /* Initially moved to the left */
+            background-color:  #03333c;
+            border-radius: 15px;
+            box-shadow: 0 0 10px #2BC0E4;
+            text-align: left;
+            border: 5px solid white;
+            animation: fadeInLeft 1s ease-out forwards; /* Keep the forwards to retain the final state */
+            color:white;
+        }
+
+        .upcoming h2 {
+            text-align: center; /* Corrected property value */
+            font-size: 24px;
+            color: #333; /* Set your desired text color */
+            margin-top:5px;
+            margin-bottom: 20px;
+            margin-left: 10px;
+            color:white;
+            font-family: "Anta", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .upcoming ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .upcoming li {
+            font-size: 20px;
+            font-weight:300;
+            color: white; /* Set your desired text color */
+            margin-bottom: 10px;
+
+        }
+
+
+
+
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-150%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-100%);
+            }
+        }
+
+
+        @keyframes fadeInLeft2 {
+            from {
+                opacity: 0;
+                transform: translateX(-150%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0%);
+            }
+        }
+        .logo {
+            font-family: "Anta", sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            font-size: 2rem;
+            margin-bottom: 5px;
+            transition: transform 1s ease;
+            border-radius: 100%;
+            position: fixed;
+            top: 6%;
+            left: 2%;
+            color: white;
+            z-index: 1; /* Add this line to set the z-index */
+        }
+
+        .logo:hover {
+            transform: rotate(360deg); /* Rotate 360 degrees on hover */
+            background-color: transparent;
+        }
+
+        .logo p {
+            margin: 0; /* Remove default margin for the p element */
         }
 
     </style>
 </head>
 <body>
+    <div class='logo'>
+         <p >REW</p>
+    </div>
+
     <div class="sidebar">
         <nav>
             <ul>
-                <li>Orders</li>
-                <li>Inventory</li>
-                <li>Clients</li>
+                <li onclick="window.location.href='{{ url_for('orders') }}'"><a href="{{ url_for('orders') }}" class="nav-link">Orders</a></li>
+                <li onclick="window.location.href='{{ url_for('inventory') }}'"><a href="{{ url_for('inventory') }}" class="nav-link">Inventory</a></li>
+                <li onclick="window.location.href='{{ url_for('clients') }}'"><a href="{{ url_for('clients') }}" class="nav-link">Clients</a></li>
+                <li onclick="window.location.href='{{ url_for('buyers') }}'"><a href="{{ url_for('buyers') }}" class="nav-link">Buyers</a></li>
+                <li onclick="window.location.href='{{ url_for('analysis') }}'"><a href="{{ url_for('analysis') }}" class="nav-link">Analysis</a></li>
+
             </ul>
         </nav>
     </div>
+
+
     <div class="content">
         <h1>Welcome, {{ user_id }}!</h1>
         <button class="signout-button" onclick="signOut()">Sign Out</button>
+        <div>
+            <button class = 'add-order-button' onclick="showOrderForm()">ADD AN ORDER</button>
+            <div id="orderForm" class="container-box" style="display: none;">
+                <form  action="/welcome" method="post">
+                    <input type="hidden" name="form_id" value="order_form">
+                    <label for="orderClientType">Order Client Type:</label>
+                    <select id="orderClientType" name="orderClientType"  onchange="toggleCustomClientNameInput()" required></select><br>
+                    <input type="text" id="customClientName" name="customClientName" placeholder="Enter custom client name" style="display: none;"><br>
 
-        <script>
-            function signOut() {
-                window.location.href = "{{ url_for('homepage') }}";
-            }
-        </script>
+
+
+                    <label for="itemType">Item Type:</label>
+                    <select id="itemType" name="itemType" required>
+                        <!-- Add options for different item types here -->
+                        <option value="SS TANK">SS TANK</option>
+                        <option value="MS TANK">MS TANK</option>
+                        <option value="REACTOR VESSEL">REACTOR VESSEL</option>
+                        <option value="INDUSTRIAL CHIMNEY">INDUSTRIAL CHIMNEY</option>
+                        <option value="FORMALDEHYDE PLANT">FORMALDEHYDE PLANT</option>
+                        <option value="HEAT EXCHANGER">HEAT EXCHANGER</option>
+                        <!-- Add more options as needed -->
+                    </select><br>
+
+                    <label for="totalAmount">Total Amount:</label>
+                    <input type="number" id="totalAmount" name="totalAmount" required><br>
+
+                    <label for="dueDate">Due Date:</label>
+                    <input type="date" id="dueDate" name="dueDate" required><br>
+
+                    <label for="poNumber">PO Number:</label>
+                    <input type="text" id="poNumber" name="poNumber" required><br>
+
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <div>
+            <button class =  "add-item-button" onclick="showItemForm()">ADD AN ITEM</button>
+            <div id="itemForm" class="container-box" style="display: none;">
+                <form   action="/welcome" method="post">
+                    <input type="hidden" name="form_id" value="item_form">
+                    <label for="ItemType">Item Type : </label>
+                    <select id="ItemType" name="ItemType"  onchange="togglecustomitemType()" required></select><br>
+                    <input type="text" id="customItemName" name="customItemName" placeholder="Enter custom item name" style="display: none;"><br>
+
+
+                    <label for="Quantity">Quantity:</label>
+                    <input type="number" id="Quantity" name="Quantity" required><br>
+
+                    <label for="LastOrdered">Last Ordered:</label>
+                    <input type="date" id="LastOrdered" name="LastOrdered" required><br>
+
+                    <label for="Cost">Cost:</label>
+                    <input type="text" id="Cost" name="Cost"><br>
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <div>
+            <button class = 'add-buyer-button' onclick="showbuyerForm()">ADD A BUYER</button>
+            <div id="buyerForm" class="container-box" style="display: none;">
+                <form  action="/welcome" method="post">
+                    <input type="hidden" name="form_id" value="buyer_form">
+                    <label for="buyer">Buyer Name:</label>
+                    <input id="buyer" name="buyer"  required></input><br>
+
+
+
+                    <label for="service">Service:</label>
+                    <input id="service" name="service" required>
+
+                    <label for="outstanding">Outstanding:</label>
+                    <input type="number" id="outstanding" name="outstanding" required><br>
+
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+
+        <div  class='upcoming'>
+            <h2>Orders Due This Month</h2>
+            <ul>
+                {% for order in orders_this_month %}
+                    <li>{{ order['Client_name'] }} - Due Date: {{ order['Due_date'] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
     </div>
+
+   <script>
+    function signOut() {
+        window.location.href = "{{ url_for('homepage') }}";
+    }
+
+    function showOrderForm() {
+        var orderForm = document.getElementById("orderForm");
+
+        // Toggle the visibility of the form
+        if (orderForm.style.display === "block") {
+            orderForm.style.display = "none";
+        } else {
+            orderForm.style.display = "block";
+        }
+    }
+
+
+     function showbuyerForm() {
+        var buyerForm = document.getElementById("buyerForm");
+
+        // Toggle the visibility of the form
+        if (buyerForm.style.display === "block") {
+            buyerForm.style.display = "none";
+        } else {
+            buyerForm.style.display = "block";
+        }
+    }
+
+    function showItemForm() {
+        var itemForm = document.getElementById("itemForm");
+
+        // Toggle the visibility of the form
+        if (itemForm.style.display === "block") {
+            itemForm.style.display = "none";
+        } else {
+            itemForm.style.display = "block";
+        }
+    }
+
+    // Set the min attribute of the dueDate input to the current date
+    document.addEventListener("DOMContentLoaded", function () {
+        var dueDateInput = document.getElementById("dueDate");
+        var currentDate = new Date();
+        var formattedDate = currentDate.toISOString().split('T')[0];  // Format as YYYY-MM-DD
+        dueDateInput.min = formattedDate;
+    });
+
+
+   document.addEventListener("DOMContentLoaded", function () {
+    // Fetch client names from the server (you need to implement this endpoint in your Flask app)
+    fetch('/get_client_names')
+        .then(response => response.json())
+        .then(clientNames => {
+            clientNames.push({ id: "other", text: "Add a new Client" });
+
+            // Check if there are existing client names
+            var hasExistingClients = clientNames.length > 1;
+
+            // Populate the dropdown with client names using Select2
+            $('#orderClientType').select2({
+                data: clientNames,
+                placeholder: 'Search for a client...',
+                allowClear: true,
+                width: '100%'  // Adjust the width as needed
+            });
+
+            // Show the custom client name input if there are no existing clients
+            var customClientNameInput = document.getElementById("customClientName");
+            customClientNameInput.style.display = hasExistingClients ? "none" : "block";
+
+            // Event listener for the change event
+            $('#orderClientType').on('change', function () {
+                // Show the custom client name input only when "Add a new Client" is selected
+                customClientNameInput.style.display = (this.value === "other") ? "block" : "none";
+            });
+        })
+        .catch(error => console.error('Error fetching client names:', error));
+});
+
+    document.addEventListener("DOMContentLoaded", function () {
+    // Fetch item names from the server (you need to implement this endpoint in your Flask app)
+    fetch('/get_item_names')
+        .then(response => response.json())
+        .then(itemNames => {
+            itemNames.push({ id: "other", text: "Add a new Item" });
+
+            // Check if there are existing item names
+            var hasExistingItems = itemNames.length > 1;
+
+            // Populate the dropdown with item names using Select2
+            $('#ItemType').select2({
+                data: itemNames,
+                placeholder: 'Search for an item...',
+                allowClear: true,
+                width: '100%'  // Adjust the width as needed
+            });
+
+            // Show the custom item name input if there are no existing items
+            var customItemNameInput = document.getElementById("customItemName");
+            customItemNameInput.style.display = hasExistingItems ? "none" : "block";
+
+            // Event listener for the change event
+            $('#ItemType').on('change', function () {
+                // Show the custom item name input only when "Add a new Item" is selected
+                customItemNameInput.style.display = (this.value === "other") ? "block" : "none";
+            });
+        })
+        .catch(error => console.error('Error fetching item names:', error));
+});
+
+
+    function togglecustomitemType() {
+        var itemTypeDropdown = document.getElementById("ItemType");
+        var customItemNameInput = document.getElementById("customItemName");
+
+        // If "Other" is selected, show the custom client name input, otherwise hide it
+        customItemNameInput.style.display = (itemTypeDropdown.value === "other") ? "block" : "none";
+    }
+
+    function toggleCustomClientNameInput() {
+        var orderClientTypeDropdown = document.getElementById("orderClientType");
+        var customClientNameInput = document.getElementById("customClientName");
+
+        // If "Other" is selected, show the custom client name input, otherwise hide it
+        customClientNameInput.style.display = (orderClientTypeDropdown.value === "other") ? "block" : "none";
+    }
+
+
+    function signOut() {
+        // Make a request to the server to clear the session
+        fetch('/signout', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                // Redirect to the homepage after clearing the session
+                window.location.href = "{{ url_for('homepage') }}";
+            })
+            .catch(error => console.error('Error signing out:', error));
+    }
+
+</script>
 </body>
 </html>

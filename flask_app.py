@@ -9,6 +9,7 @@ from collections import defaultdict
 from datetime import datetime , timedelta
 from collections import Counter
 from functools import wraps
+from config import allowed_users
 
 
 #  AUTHORIZATION PART WITH GOOGLE
@@ -26,11 +27,6 @@ google_bp = make_google_blueprint(
 
 app.register_blueprint(google_bp, url_prefix='/google_login')
 
-allowed_users = {
-    'Moksh': 'moksh0224',
-    'Amit': 'amit123',
-    'Umesh': 'umesh1971'
-}
 
 spreadsheet_id = '1fyRwbxfQ2Utbr32HGk8BooPnmJG2NtDSqT19NzXz-ts'
 worksheet_name = 'Sheet1'

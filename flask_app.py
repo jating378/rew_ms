@@ -15,7 +15,7 @@ from functools import wraps
 
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = 'retaengineeringworks'
 
 # Modify the scope to include 'profile' and 'email'
 google_bp = make_google_blueprint(
@@ -27,9 +27,9 @@ google_bp = make_google_blueprint(
 app.register_blueprint(google_bp, url_prefix='/google_login')
 
 allowed_users = {
-    'admin': 'admin_pass',
-    'accountant': 'accountant_pass',
-    'assistant': 'assistant_pass'
+    'Moksh': 'moksh0224',
+    'Amit': 'amit123',
+    'Umesh': 'umesh1971'
 }
 
 spreadsheet_id = '1fyRwbxfQ2Utbr32HGk8BooPnmJG2NtDSqT19NzXz-ts'
@@ -900,7 +900,7 @@ def update_buyer(row_id):
 def analysis():
     try:
 
-        if session.get('user_id') != 'admin':
+        if session.get('user_id') != 'Moksh' :
             return redirect(url_for('homepage'))
 
         # Analysis for Sheet1

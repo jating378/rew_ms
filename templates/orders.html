@@ -118,10 +118,17 @@
             }
         }
 
+        .filters{
+            position = fixed;
+            top:30%;
+            left:50%;
+        }
+
 
     </style>
 </head>
 <body>
+
     <!-- Flash Messages -->
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -139,6 +146,46 @@
         <a href="{{ url_for('welcome') }}">Back to Home</a>
     </div>
 
+    <div class="filters" style="text-align: center; padding: 10px; border: 2px solid black; border-radius:5px;">
+    <form method="post" id="filter-form">
+        <label for="month-filter">Filter by Month:</label>
+        <select id="month-filter" name="month-filter">
+            <option value="">All Months</option>
+            <option value="2024-01">January</option>
+            <option value="2024-02">February</option>
+            <option value="2024-03">March</option>
+            <option value="2024-04">April</option>
+            <option value="2024-05">May</option>
+            <option value="2024-06">June</option>
+            <option value="2024-07">July</option>
+            <option value="2024-08">August</option>
+            <option value="2024-09">September</option>
+            <option value="2024-10">October</option>
+            <option value="2024-11">November</option>
+            <option value="2024-12">December</option>
+            <!-- Add options for other months -->
+        </select>
+
+        <label for="item-type-filter">Filter by Item Type:</label>
+        <select id="item-type-filter" name="item-type-filter">
+            <option value="">All Item Types</option>
+            <option value="SS TANK">SS TANK</option>
+            <option value="REACTOR VESSEL">Reactor Vessel</option>
+            <option value="MS TANK">MS TANK</option>
+            <option value="FORMALDEHYDE PLANT">FORMALDEHYDE PLANT</option>
+            <option value="HEAT EXCHANGER">HEAT EXCHANGER</option>
+            <!-- Add options for other item types -->
+        </select>
+
+        <label for="po-number-filter">Filter by PO Number:</label>
+        <input type="text" id="po-number-filter" name="po-number-filter">
+
+        <button type="button" onclick="applyFilters()">Apply Filters</button>
+    </form>
+</div>
+
+
+
     <table border="1">
         <thead>
             <tr>
@@ -155,10 +202,10 @@
                         <td>{{ value }}</td>
                     {% endfor %}
                     <td>
-                        <form method="post" action="{{ url_for('edit_order', row_id=row[0]) }}">
+                        <form method="post"  action="{{ url_for('edit_order', row_id=row[0]) }}">
                             <button type="submit">Edit</button>
                         </form>
-                        <form method="post" action="{{ url_for('delete_order', row_id=row[0]|urlencode) }}">
+                        <form method="post"  onsubmit="return confirm('Are you sure you want to delete this record?');"  action="{{ url_for('delete_order', row_id=row[0]|urlencode) }}">
                             <input type="submit" value="Delete">
                         </form>
                     </td>
@@ -167,4 +214,9 @@
         </tbody>
     </table>
 </body>
+<script>
+    function applyFilters() {
+        document.getElementById("filter-form").submit();
+    }
+</script>
 </html>

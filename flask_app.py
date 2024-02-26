@@ -10,6 +10,7 @@ from datetime import datetime , timedelta
 from collections import Counter
 from functools import wraps
 from config import allowed_users
+import sys
 
 
 #  AUTHORIZATION PART WITH GOOGLE
@@ -374,7 +375,7 @@ def get_item_names_endpoint():
 # CRUD OPERATIONS ON ORDERS
 
 
-@app.route('/orders')
+@app.route('/orders' , methods=['GET','POST'])
 @login_required
 def orders():
     if not google.authorized:
@@ -394,11 +395,43 @@ def orders():
         header = values[0]
         rows = values[1:]
 
+        # Filter rows based on form data
+        if request.method == 'POST':
+            rows = apply_filters(request.form, header, rows)
+
         return render_template('orders.html', header=header, rows=rows)
 
     except Exception as e:
         print(f"Error fetching orders: {e}")
         return render_template('error.html', message="Failed to fetch orders.")
+
+def apply_filters(form_data, header, rows):
+    month_filter = form_data.get('month-filter')
+    item_type_filter = form_data.get('item-type-filter')
+    po_number_filter = form_data.get('po-number-filter')
+
+    print(f"Received form data - Month: {month_filter}, Item Type: {item_type_filter}, PO Number: {po_number_filter}", file=sys.stdout, flush=True)
+
+    if month_filter:
+        # Assuming the date is in column 1
+        # Convert the string filter to datetime for proper comparison
+        filter_date = datetime.strptime(month_filter, "%Y-%m")
+        rows = [row for row in rows if datetime.strptime(row[4], "%Y-%m-%d").month == filter_date.month]
+
+    if item_type_filter:
+        # Assuming the item type is in column 3
+        print(f"Applying item type filter: {item_type_filter}", file=sys.stdout, flush=True)
+        # Loop through each row and apply the filter
+        rows = [row for row in rows if row[2].lower() == item_type_filter.lower()]
+
+    if po_number_filter:
+        # Assuming the PO number is in column 5
+        print(f"Applying PO number filter: {po_number_filter}", file=sys.stdout, flush=True)
+        # Loop through each row and apply the filter
+        rows = [row for row in rows if str(row[5]) == po_number_filter]
+
+    print(f"Filtered rows: {rows}", file=sys.stdout, flush=True)
+    return rows
 
 
 from flask import flash, redirect, url_for
